@@ -3,8 +3,9 @@ const Router = express.Router();
 
 const controller = require('./controller');
 
-Router.get('/', (req, res)=>{
-  const messages = controller.getMessages();
+Router.get('/',
+async (req, res)=>{
+  const messages = await controller.getMessages();
   res.json(messages);
 });
 
@@ -18,12 +19,27 @@ Router.post('/', (req, res)=>{
   res.json(newMessage);
 });
 
-Router.patch('/:id', (req, res)=>{
-  res.send(`Actualizar el ${req.params.id}`);
+Router.patch('/:id',
+async (req, res)=>{
+  try {
+    const id = req.params.id;
+    const message = req.body.message;
+    const updatedMessage = await controller.updateMessage(id, message);
+    res.json(updatedMessage);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
-Router.delete('/:id', (req, res)=>{
-  res.send(`message deleted successfully con el id ${req.params.id}`);
+Router.delete('/:id',
+async (req, res)=>{
+  try {
+    const id = req.params.id;
+    const deletedMessage = await controller.deleteMessage(id);
+    res.send(deletedMessage);
+  } catch (error) {
+    res.send(error.message);
+  }
 });
 
 module.exports = Router;

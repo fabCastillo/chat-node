@@ -1,7 +1,7 @@
 const store = require('./store');
 
-function getMessages() {
-  return store.list();
+async function getMessages() {
+  return await store.list();
 }
 
 function getMessagesById() {
@@ -12,12 +12,12 @@ function addMessage(data) {
   store.add(data);
 }
 
-function updateMessage() {
-
+async function updateMessage(id, message) {
+  return await store.update(id, message);
 }
 
-function deleteMessage() {
-
+async function deleteMessage(id) {
+  return await store.delete(id);
 }
 
 module.exports = {
