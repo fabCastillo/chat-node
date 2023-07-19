@@ -13,9 +13,10 @@ Router.get('/:id', (req, res)=>{
   res.send(`Ingresas el ${req.params.id}`);
 });
 
-Router.post('/', (req, res)=>{
+Router.post('/', 
+async (req, res)=>{
   const body = req.body;
-  const newMessage = controller.addMessage(body);
+  const newMessage = await controller.addMessage(body);
   res.json(newMessage);
 });
 

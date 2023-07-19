@@ -8,8 +8,14 @@ function getMessagesById() {
 
 }
 
-function addMessage(data) {
-  store.add(data);
+async function addMessage({user, message}) {
+  const fullMessage = {
+    user: user,
+    message: message,
+    date: new Date()
+  }
+  const createdMessage = await store.add(fullMessage);
+  return createdMessage;
 }
 
 async function updateMessage(id, message) {

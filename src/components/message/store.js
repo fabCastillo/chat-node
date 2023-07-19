@@ -13,7 +13,8 @@ async function getMessages(){
 
 async function addMessage(message) {
   const newMessage = new Message(message);
-  await newMessage.save();
+  const createdMessage = await newMessage.save();
+  return createdMessage;
 }
 
 async function updateMessage(id, data) {
