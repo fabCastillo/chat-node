@@ -7,7 +7,7 @@ async function findMessageById(id) {
   return foundMessage;
 }
 async function getMessages(){
-  const messages = await Message.find();
+  const messages = await Message.find().populate('user');
   return messages;
 }
 
