@@ -8,8 +8,9 @@ function getMessagesById() {
 
 }
 
-async function addMessage({user, message}) {
+async function addMessage({chat, user, message}) {
   const fullMessage = {
+    chat: chat,
     user: user,
     message: message,
     date: new Date()
