@@ -7,7 +7,8 @@ const MessageSchema = new Schema({
     type: String,
     required: true
   },
-  date: Date
+  date: Date,
+  file: String
 });
 
 const Message = model('Message', MessageSchema);

@@ -8,12 +8,18 @@ function getMessagesById() {
 
 }
 
-async function addMessage({chat, user, message}) {
+async function addMessage({chat, user, message}, file) {
+  
+  let fileUrl;
+  
+  if(file) fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+
   const fullMessage = {
     chat: chat,
     user: user,
     message: message,
-    date: new Date()
+    date: new Date(),
+    file: fileUrl
   }
   const createdMessage = await store.add(fullMessage);
   return createdMessage;

@@ -1,5 +1,10 @@
 const express = require('express');
+const multer = require('multer');
+
 const Router = express.Router();
+const upload = multer({
+  dest: 'public/files/'
+})
 
 const controller = require('./controller');
 
@@ -13,10 +18,11 @@ Router.get('/:id', (req, res)=>{
   res.send(`Ingresas el ${req.params.id}`);
 });
 
-Router.post('/', 
+Router.post('/',
+upload.single('file'), 
 async (req, res)=>{
   const body = req.body;
-  const newMessage = await controller.addMessage(body);
+  const newMessage = await controller.addMessage(body, req.file);
   res.json(newMessage);
 });
 
