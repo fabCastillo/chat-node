@@ -1,5 +1,5 @@
 const store = require('./store');
-
+const { socket } = require('../../../socket');
 async function getMessages() {
   return await store.list();
 }
@@ -22,6 +22,9 @@ async function addMessage({chat, user, message}, file) {
     file: fileUrl
   }
   const createdMessage = await store.add(fullMessage);
+
+  socket.io.emit('message', fullMessage);
+
   return createdMessage;
 }
 
